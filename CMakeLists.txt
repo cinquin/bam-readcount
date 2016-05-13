@@ -11,6 +11,10 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_SOURCE_DIR}/build-common/cmake
 )
 
+FIND_PACKAGE(Boost COMPONENTS program_options REQUIRED)
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+link_libraries(${Boost_LIBRARIES})
+
 include(TestHelper)
 include(VersionHelper)
 include(ProjectHelper)
@@ -23,8 +27,6 @@ configure_file(version/version.h.in version/version.h @ONLY)
 include_directories(${PROJECT_BINARY_DIR}/version)
 
 set(REQUIRED_BOOST_LIBS program_options regex)
-include(BuildBoost)
-include_directories(${Boost_INCLUDE_DIRS})
 
 include(BuildSamtools)
 include_directories(${Samtools_INCLUDE_DIRS})
